@@ -1,19 +1,61 @@
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config()
 
 export class MovieList {
-  getTopRated() {
-    let topRated: Object;
-    axios({
+  static async getTopRated() {
+    const topRated = await axios({
       method: "get",
       url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
       responseType: "json",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzFhN2ZiNjgwMzQzZmZiNmNlNWVjN2VhZGZmZDY5NCIsInN1YiI6IjY1YmQwOGIwY2ZmZWVkMDE2M2FlMzEzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ItKd1zgNVGdGOvYIMo_y4Udb4Ev546FJSew0p-fioFM",
+        Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
       },
-    }).then((res) => {
-        res.data = topRated;
-        console.log(topRated);
     });
+    return topRated?.data.results.map((x: any) => x.id);
+  }
+  static async getPopular() {
+    const popular = await axios({
+      method: "get",
+      url: "https://api.themoviedb.org/3/movie/popular",
+      responseType: "json",
+      headers: {
+        Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+      },
+    });
+    return popular?.data.results.map((x: any) => x.id);
+  }
+  static async getNowPlaying() {
+    const nowPlaying = await axios({
+      method: "get",
+      url: "https://api.themoviedb.org/3/movie/now_playing",
+      responseType: "json",
+      headers: {
+        Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+      },
+    });
+    return nowPlaying?.data.results.map((x: any) => x.id);
+  }
+  static async getUpcoming() {
+    const upcoming = await axios({
+      method: "get",
+      url: "https://api.themoviedb.org/3/movie/upcoming",
+      responseType: "json",
+      headers: {
+        Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+      },
+    });
+    return upcoming?.data.results.map((x: any) => x.id);
   }
 }
+
+
+//This class returns id values for upcoming movies, top rated movies etc as an array of integers.
+//Test:
+/*  MovieList.getNowPlaying()
+  .then((text) => {
+    console.log(text)
+  })
+  .catch((err) => {
+    console.log(err)
+  });  */
