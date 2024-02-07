@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import { Genre } from "./genres";
+import { Genre } from "./movieLists";
 dotenv.config();
 
 export class MovieList {
