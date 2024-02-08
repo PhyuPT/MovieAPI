@@ -3,7 +3,7 @@ import validator from 'validator'
 import { type IUser } from '../types/user'
 
 const userSchema = new Schema({
-    name: {
+    userName: {
         type: String,
         required: [true, 'Please tell us your name!'],
     },
@@ -13,12 +13,6 @@ const userSchema = new Schema({
         unique: true,
         lowercase: true,
         validate: [validator.isEmail, 'Please provide a valid email'],
-    },
-    photo: String,
-    role: {
-        type: String,
-        enum: ['user', 'admin'],
-        default: 'user',
     },
     password: {
         type: String,
@@ -36,6 +30,10 @@ const userSchema = new Schema({
             message: 'Passwords are not the same!',
         },
     },
+    photo: String,
+    favouriteContent: {
+        type: [Number]
+    }
 })
 
 type User = InferSchemaType<typeof userSchema>
