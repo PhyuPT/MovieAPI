@@ -8,30 +8,39 @@ const language = 'en-US';
 const page = 1;
 
 export class Search {
-  searchMulti() {
-    let searchMulti: Object;
-    axios({
+  static async searchMulti(query: String) {
+    let searchMultiData = await axios({
       method: "get",
-      //url:"https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1&APIKEY=${APIKEY}",
-      url:apiUrl,
-      params:{
+      //url:`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1&APIKEY=${apiKey}`,
+      url:`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
+      /*url:apiUrl,
+       params:{
                 query,
                 include_adult: includeAdult,
                 language,
                 page,
                 api_key: apiKey
-      },
+      }, */
       responseType: "json",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYzFhN2ZiNjgwMzQzZmZiNmNlNWVjN2VhZGZmZDY5NCIsInN1YiI6IjY1YmQwOGIwY2ZmZWVkMDE2M2FlMzEzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ItKd1zgNVGdGOvYIMo_y4Udb4Ev546FJSew0p-fioFM",
+        Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
       },
     }).then((res) => {
-        res.data = searchMulti;
-        console.log(searchMulti);
-    })
-    .catch(error=>{
-      console.log("There was a problem with the Axios request:", error)
-    });
+      res.data = searchMultiData;
+      console.log(searchMultiData);
+  })
+  .catch(error=>{
+    console.log("There was a problem with the Axios request:", error)
+  });
   }
 }
+
+
+//test
+/*  Search.searchMulti("Disney")
+   .then((text) => {
+     console.log(text);
+   })
+   .catch((err) => {
+     console.log(err);
+   }); */
