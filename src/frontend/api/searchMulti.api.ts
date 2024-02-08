@@ -1,4 +1,6 @@
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const apiUrl = 'https://api.themoviedb.org/3/search/multi';
 const apiKey = "2c1a7fb680343ffb6ce5ec7eadffd694";// Replace 'YOUR_API_KEY' with your actual API key
@@ -12,7 +14,7 @@ export class Search {
     let searchMultiData = await axios({
       method: "get",
       //url:`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1&APIKEY=${apiKey}`,
-      url:`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
+      url: `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
       /*url:apiUrl,
        params:{
                 query,
@@ -25,22 +27,17 @@ export class Search {
       headers: {
         Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
       },
-    }).then((res) => {
-      res.data = searchMultiData;
-      console.log(searchMultiData);
-  })
-  .catch(error=>{
-    console.log("There was a problem with the Axios request:", error)
-  });
+    })
+    return searchMultiData.data.results.map((x:any)=>{return x.id});
   }
 }
 
 
 //test
-/*  Search.searchMulti("Disney")
+  Search.searchMulti("Disney")
    .then((text) => {
      console.log(text);
    })
    .catch((err) => {
      console.log(err);
-   }); */
+   });

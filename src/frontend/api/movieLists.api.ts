@@ -81,11 +81,11 @@ export class MovieList {
 //It also returns the first page of search by genre. Genre works by querying valid genre string to get genre number,
 //then you can send another query with that genre number
 //Test:
-/* MovieList.getMoivesByGenre("Action")
+MovieList.getMoivesByGenre("Science Fiction")
   .then((text) => {
     console.log(text);
   })
   .catch((err) => {
     console.log(err);
   });
- */
+ 

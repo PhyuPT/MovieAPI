@@ -14,7 +14,7 @@ export class MovieData {
     });
 
     let youtubeTrailers = fullMovieData.data.videos.results.filter((x:any)=>{return (x.site=="YouTube"&&x.type=="Trailer")});
-    let watchProviders = fullMovieData.data["watch/providers"].results.CA.flatrate;
+    let watchProviders = fullMovieData.data["watch/providers"].results.CA?.flatrate;
     let cast = fullMovieData.data.credits.cast.filter((x:any) => {
       return (x.known_for_department == "Acting"&&x.order<5);
     }); //write code to limit results to ~ 10
@@ -31,10 +31,10 @@ export class MovieData {
 }
 
 //test
-/*  MovieData.getMovieData(1230393)
+ MovieData.getMovieData(66379)
    .then((text) => {
      console.log(text);
    })
    .catch((err) => {
      console.log(err);
-   }); */
+   }); 
