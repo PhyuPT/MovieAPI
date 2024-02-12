@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import Review from "../models/reviewModel";
+import { get, post, patch, del, controller } from "../decorators";
 
+@controller("/api/v1")
 export class ReviewController {
+  @get("/reviews")
   async getReviewsByMovie(req: Request, res: Response): Promise<void> {
     try {
       const reviews = await Review.find({
@@ -22,7 +25,7 @@ export class ReviewController {
       });
     }
   }
-
+  @post("/reviews")
   async postReview(req: Request, res: Response): Promise<void> {
     try {
       const newReview = await Review.create(req.body);
@@ -40,12 +43,12 @@ export class ReviewController {
       });
     }
   }
-
+  @del("/reviews")
   async deleteReview(req: Request, res: Response): Promise<void> {
     try {
-      await Review.findOneAndDelete({ id: req.query.id });
+      await Review.findOneAndDelete({ contentId: req.query.contentId });
 
-      res.status(204);
+      res.status(204).end();
     } catch (err) {
       res.status(404).json({
         status: "fail",

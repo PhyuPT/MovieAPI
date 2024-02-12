@@ -5,7 +5,7 @@ import APIFeatures, { QueryString } from "../utils/apiFeatures";
 
 @controller("/api/v1")
 class TodoController {
-  @get("/todos")
+  @get("/todos") 
   async getTodos(req: Request, res: Response): Promise<void> {
     try {
       const features = new APIFeatures(Todo.find(), req.query as QueryString)

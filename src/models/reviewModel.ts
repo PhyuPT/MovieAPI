@@ -6,15 +6,16 @@ const reviewSchema = new Schema({
     required: [true, "Content Id required!"],
   },
   userId: {
-    id: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    required: [true, "User Id required!"],
   },
   comment: {
     type: String,
     required: [true, "Review text required!"],
     maxlength: 500,
   },
-  timestamp: {
-    createdAt: "created_at",
+  timestamps: {
+    createdAt:Date
   },
 });
 type Review = InferSchemaType<typeof reviewSchema>;
