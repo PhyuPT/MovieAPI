@@ -7,7 +7,7 @@ export class MovieList {
   static async getTopRated() {
     const topRated = await axios({
       method: "get",
-      url: "https://api.themoviedb.org/3/genre/movie/list?language=en",
+      url: "https://api.themoviedb.org/3/movie/top_rated",
       responseType: "json",
       headers: {
         Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
@@ -73,7 +73,7 @@ export class MovieList {
         Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
       },
     });
-    return moviesByGenre.data.results.map((x: any) => x.id);;
+    return moviesByGenre.data.results.map((x: any) => x.id);
   }
 }
 
@@ -81,11 +81,10 @@ export class MovieList {
 //It also returns the first page of search by genre. Genre works by querying valid genre string to get genre number,
 //then you can send another query with that genre number
 //Test:
-MovieList.getMoivesByGenre("Science Fiction")
+MovieList.getTopRated()
   .then((text) => {
     console.log(text);
   })
   .catch((err) => {
     console.log(err);
   });
- 
