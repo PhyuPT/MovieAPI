@@ -3,7 +3,7 @@ import validator from 'validator'
 import { type IUser } from '../types/user'
 
 const userSchema = new Schema({
-    userName: {
+    name: {
         type: String,
         required: [true, 'Please tell us your name!'],
     },
