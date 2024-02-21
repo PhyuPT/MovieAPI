@@ -21,10 +21,10 @@ app.use(
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
     },
-    // store: MongoStore.create({
-    //   mongoUrl: dbConnectionURL(),
-    //   collectionName: 'sessions',
-    // }),
+    store: MongoStore.create({
+      mongoUrl: dbConnectionURL(),
+      collectionName: 'sessions',
+    }),
   }),
 )
 app.use(passport.session())
